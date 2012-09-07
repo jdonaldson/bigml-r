@@ -29,7 +29,7 @@
 #' iris.d2 = quickDataset(iris, fields = c('Species', 'Sepal.length'), 
 #'	name='test', size=10000)
 #' }
-quickDataset <-
+quickDataset<-
 function (data, fields = names(data), name = paste(deparse(substitute(data)), 
     "'s dataset", sep = ""), size = NULL, ...) 
 {
@@ -46,9 +46,9 @@ function (data, fields = names(data), name = paste(deparse(substitute(data)),
             return("categorical")
         else return("text")
     })
-    option$fields = lapply(sresponse$fields, function(x) {
-        type = as.character(type_classes[x$column_number + 1])
-        list(optype = type)
+    option$fields = lapply(sresponse$fields, function(field) {
+        type = as.character(type_classes[field$column_number + 1])
+        list(optype = type, name = field$name)
     })
     option$name = name
     option$source = sresponse$resource
